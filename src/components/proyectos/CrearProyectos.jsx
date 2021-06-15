@@ -2,13 +2,8 @@ import useCrearProyectos from "../../hooks/proyectos/useCrearProyectos";
 import BotonCrear from "../BotonCrear";
 
 const CrearProyectos = () => {
-    const {
-        proyecto,
-        barProgress,
-        handleOnchange,
-        handleOnChangeImg,
-        crearProyecto,
-    } = useCrearProyectos();
+    const { proyecto, barProgress, handleOnchange, handleOnChangeImg, crear } =
+        useCrearProyectos();
 
     return (
         <div className="crearProyectos__contenedor">
@@ -16,7 +11,11 @@ const CrearProyectos = () => {
 
             <div className="crearProyectos__formulario-img">
                 <input type="file" onChange={handleOnChangeImg} />
-                <img src={proyecto.urlFirebase} alt={proyecto.nombre} id="img" />
+                <img
+                    src={proyecto.urlFirebase}
+                    alt={proyecto.nombre}
+                    id="img"
+                />
             </div>
 
             {barProgress !== 0 && (
@@ -33,7 +32,11 @@ const CrearProyectos = () => {
                 onChange={handleOnchange}
             />
 
-            <BotonCrear titulo="Crear Proyecto" funcion={crearProyecto} />
+            {barProgress > 0 && barProgress < 100 ? (
+                <p className="crearProyectos__subiendoImagen" >Subiendo Imagen...</p>
+            ) : (
+                <BotonCrear titulo="Crear Proyecto" funcion={crear} />
+            )}
         </div>
     );
 };

@@ -1,39 +1,32 @@
 import { useContext, useEffect, useState } from "react";
-import "firebase/firestore";
 import "firebase/storage";
-import { useFirestore, useStorage } from "reactfire";
+import { useStorage } from "reactfire";
 import MensajeContext from "../../context/mensaje/mensajeContext";
 import AuthContext from "../../context/auth/AuthContext";
+import ProyectosContext from "../../context/proyectos/ProyectosContext";
+import { urlImageDefault } from "../../urlImage";
 
 const useCrearProyectos = () => {
-    const fireStore = useFirestore();
     const storage = useStorage();
 
     const { setMensajeState } = useContext(MensajeContext);
     const { usuarioAutenticado } = useContext(AuthContext);
+    const { crearProyecto } = useContext(ProyectosContext);
 
-    const urlImageDefault =
-        "https://firebasestorage.googleapis.com/v0/b/proyecto-demo-684b8.appspot.com/o/proyecto.jpg?alt=media&token=8603e6bf-49b6-460b-ac23-fc926bc6d4d2";
-
+    const [urlImg, setUrlImg] = useState(urlImageDefault);
     const [proyecto, setProyecto] = useState({
         nombre: "",
         tareas: [],
-        urlFirebase: urlImageDefault,
-        creador: "",
+        urlFirebase: urlImg,
+        creador: usuarioAutenticado.displayName,
     });
+    const [barProgress, setBarProgress] = useState(0);
 
     useEffect(() => {
-        setProyecto({
-            ...proyecto,
-            creador:
-                usuarioAutenticado !== null
-                    ? usuarioAutenticado.displayName
-                    : "",
+        setProyecto((p) => {
+            return { ...p, urlFirebase: urlImg };
         });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [usuarioAutenticado]);
-
-    const [barProgress, setBarProgress] = useState(0);
+    }, [urlImg]);
 
     const handleOnchange = (e) => {
         setProyecto({
@@ -73,10 +66,7 @@ const useCrearProyectos = () => {
                 },
                 function complete() {
                     subir.snapshot.ref.getDownloadURL().then((url) => {
-                        setProyecto({
-                            ...proyecto,
-                            urlFirebase: url,
-                        });
+                        setUrlImg(url);
                     });
                 }
             );
@@ -90,8 +80,8 @@ const useCrearProyectos = () => {
         }
     };
 
-    const crearProyecto = async () => {
-        if (proyecto.nombre.trim() === "") {
+    const crear = async () => {
+        if (proyecto.nombre === "") {
             setMensajeState({
                 mensaje: "El nombre es obligatorio",
                 tipo: "error",
@@ -104,48 +94,23 @@ const useCrearProyectos = () => {
             return;
         }
 
-        try {
-            await fireStore.collection("proyectos").add(proyecto);
-            setProyecto({
-                ...proyecto,
-                nombre: "",
-                urlFirebase: urlImageDefault,
-            });
-            setBarProgress(0);
-            setMensajeState({
-                mensaje: "Subido con éxito",
-                tipo: "exito",
-            });
-            setTimeout(() => {
-                setMensajeState({
-                    mensaje: "",
-                });
-            }, 2000);
-        } catch (error) {
-            console.log(error);
-            setMensajeState({
-                mensaje: "Eror al subir Proyecto",
-                tipo: "error",
-            });
-            setTimeout(() => {
-                setMensajeState({
-                    mensaje: "",
-                });
-            }, 2000);
-        }
-    };
+        crearProyecto(proyecto);
 
-    const proyectoSeleccionado = (proyectoSelect) => {
-        
-    }
+        setUrlImg(urlImageDefault);
+
+        setProyecto({
+            ...proyecto,
+            nombre: "",
+        });
+        setBarProgress(0);
+    };
 
     return {
         proyecto,
         barProgress,
         handleOnchange,
         handleOnChangeImg,
-        crearProyecto,
-        proyectoSeleccionado
+        crear,
     };
 };
 

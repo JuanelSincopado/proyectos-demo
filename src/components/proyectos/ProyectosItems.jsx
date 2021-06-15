@@ -7,7 +7,7 @@ const ProyectosItems = ({ proyecto }) => {
     
     return (
         <div className="proyectosItems__contenedor" onClick={() => abrirProyecto(proyecto)} >
-            <img src={proyecto.urlFirebase} alt={proyecto.urlFirebase} />
+            <img src={proyecto.urlFirebase} alt={proyecto.nombre} />
 
             <div className="proyectosItems__contenedorDatos">
                 <p className="proyectosItems__titulo">{proyecto.nombre}</p>
