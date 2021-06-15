@@ -18,6 +18,7 @@ const ProyectosState = ({ children }) => {
         <ProyectosContext.Provider
             value={{
                 proyectoAbierto,
+                setProyectoAbierto,
                 abrirProyecto
             }}
         >

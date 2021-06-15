@@ -1,7 +1,7 @@
+import { useContext } from "react";
 import { useAuth } from "reactfire";
 import "firebase/auth";
 import { useHistory } from "react-router-dom";
-import { useContext } from "react";
 import AuthContext from "../../context/auth/AuthContext";
 
 const Navbar = () => {
@@ -20,7 +20,7 @@ const Navbar = () => {
         <div className="navbar__contenedor">
             <p className="navbar__nombreUsuario">
                 <i className="fas fa-user"></i>{" "}
-                {usuarioAutenticado && usuarioAutenticado.displayName}
+                {usuarioAutenticado.displayName}
             </p>
 
             <button className="navbar__boton" onClick={cerrarSesion}>

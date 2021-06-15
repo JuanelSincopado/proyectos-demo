@@ -17,6 +17,7 @@ const useCrearProyectos = () => {
 
     const [proyecto, setProyecto] = useState({
         nombre: "",
+        tareas: [],
         urlFirebase: urlImageDefault,
         creador: "",
     });

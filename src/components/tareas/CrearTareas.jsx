@@ -1,21 +1,12 @@
-import { useContext, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useContext } from "react";
 import ProyectosContext from "../../context/proyectos/ProyectosContext";
 import useTareas from "../../hooks/tareas/useTareas";
 import BotonCrear from "../BotonCrear";
 
 const CrearTareas = () => {
-    const history = useHistory();
-
-    const { proyectoAbierto } = useContext(ProyectosContext);
-
     const { tarea, handleOnChange, crear } = useTareas();
 
-    useEffect(() => {
-        if (!proyectoAbierto) {
-            history.push("/proyectos");
-        }
-    });
+    const { proyectoAbierto } = useContext(ProyectosContext);
 
     return (
         <div className="crearTareas__contenedor">

@@ -9,42 +9,57 @@ const TareasState = ({ children }) => {
     const firestore = useFirestore();
     const FieldValue = useFirestore.FieldValue;
 
-    const { proyectoAbierto } = useContext(ProyectosContext);
+    const { proyectoAbierto, setProyectoAbierto } =
+        useContext(ProyectosContext);
     const { setMensajeState } = useContext(MensajeContext);
 
     const crearTarea = async (tarea) => {
-        proyectoAbierto.tareas.push(tarea);
+        const { tareas } = proyectoAbierto;
 
-        // try {
-        //     await firestore
-        //         .collection("proyectos")
-        //         .doc(proyectoAbierto.NO_ID_FIELD)
-        //         .set(proyectoAbierto);
+        setProyectoAbierto({
+            ...proyectoAbierto,
+            tareas: [...tareas, tarea],
+        });
 
-        //     setMensajeState({
-        //         mensaje: "Subido con éxito",
-        //         tipo: "exito",
-        //     });
-        //     setTimeout(() => {
-        //         setMensajeState({
-        //             mensaje: "",
-        //         });
-        //     }, 2000);
-        // } catch (error) {
-        //     console.log(error.message);
-        //     setMensajeState({
-        //         mensaje: "Eror al subir Proyecto",
-        //         tipo: "error",
-        //     });
-        //     setTimeout(() => {
-        //         setMensajeState({
-        //             mensaje: "",
-        //         });
-        //     }, 2000);
-        // }
+        try {
+            await firestore
+                .collection("proyectos")
+                .doc(proyectoAbierto.NO_ID_FIELD)
+                .update({
+                    tareas: FieldValue.arrayUnion(tarea),
+                });
+            setMensajeState({
+                mensaje: "Subido con éxito",
+                tipo: "exito",
+            });
+            setTimeout(() => {
+                setMensajeState({
+                    mensaje: "",
+                });
+            }, 2000);
+        } catch (error) {
+            console.log(error.message);
+            setMensajeState({
+                mensaje: "Eror al subir Proyecto",
+                tipo: "error",
+            });
+            setTimeout(() => {
+                setMensajeState({
+                    mensaje: "",
+                });
+            }, 2000);
+        }
     };
 
     const eliminar = async (tarea) => {
+
+        const resultado = proyectoAbierto.tareas.filter(item => item !== tarea)
+
+        setProyectoAbierto({
+            ...proyectoAbierto,
+            tareas: resultado
+        })
+
         try {
             await firestore
                 .collection("proyectos")
@@ -52,9 +67,7 @@ const TareasState = ({ children }) => {
                 .update({
                     tareas: FieldValue.arrayRemove(tarea),
                 });
-            proyectoAbierto.tareas.filter(
-                (tareaEliminada) => tareaEliminada.nombre !== tarea.nombre
-            );
+
             setMensajeState({
                 mensaje: "Eliminado con éxito",
                 tipo: "exito",
