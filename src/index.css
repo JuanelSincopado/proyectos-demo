@@ -1,13 +1,145 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+    --sombra: 0px 1px 2px rgba(0, 0, 0, 0.16), 0px 2px 4px rgba(0, 0, 0, 0.12),
+        0px 1px 8px rgba(0, 0, 0, 0.1);
+    --morado: #6200ee;
+    --negro: #383838;
+    --azul: rgb(61, 152, 226);
+    --verde: rgb(69, 163, 69);
+    --rojo: rgb(192, 46, 46);
+}
+
+/* -- PROYECTOS -- */
+
+.proyecto {
+    position: relative;
+    overflow: hidden;
+}
+
+.tareas{
+    position: relative;
+    overflow: hidden;
+}
+
+/* -- BOTON CREAR -- */
+
+.botonCrear {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    border: none;
+    background-color: var(--verde);
+    box-shadow: var(--sombra);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 10px;
+    transition: all 0.2s ease;
+    font-size: 16px;
+}
+
+.botonCrear:hover {
+    transform: translateY(-3px);
+    transition: all 0.2s ease;
+}
+
+/* -- MENSAJE -- */
+
+.mensaje__contenedor {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--sombra);
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    position: absolute;
+    margin: auto;
+    top: 85px;
+    left: 0;
+    right: 0;
+    font-size: 16px;
+}
+
+.mensaje__contenedor-noMensaje {
+    position: absolute;
+    left: 100000px;
+    top: 85px;
+}
+
+.mensaje__contenedor > i {
+    margin-left: 10px;
+}
+
+.mensaje__contenedor-exito {
+    color: var(--verde);
+}
+
+.mensaje__contenedor-error {
+    color: var(--rojo);
+}
+
+@media (min-width: 768px) {
+    .mensaje__contenedor {
+        right: 10px;
+        left: auto;
+        font-size: 20px;
+        width: 500px;
+    }
+}
+
+/* -- SPINNER -- */
+
+.spinner__contenedor {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    margin-top: 15vh;
+}
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid var(--azul);
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: var(--azul) transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

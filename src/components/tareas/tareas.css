@@ -1,0 +1,127 @@
+.crearTareas__contenedor {
+    background-color: var(--azul);
+    width: 100%;
+    padding: 20px;
+}
+
+.crearTareas__volver {
+    font-size: 20px;
+    color: white;
+}
+
+.crearTareas__titulo {
+    text-align: center;
+    font-weight: 700;
+    color: white;
+    font-size: 24px;
+}
+
+.crearTareas__formulario {
+    width: 100%;
+    text-align: center;
+}
+
+.crearTareas__input {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    outline-width: 0;
+    border-bottom: solid 1px #e1e1e1;
+}
+
+.crearTareas__input::-webkit-input-placeholder {
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .crearTareas__volver {
+        font-size: 25px;
+        margin-left: 30px;
+        transition: all 0.2s ease;
+    }
+
+    .crearTareas__volver:hover {
+        transform: translateY(-3px);
+        transition: all 0.2s ease;
+    }
+
+    .crearTareas__titulo {
+        font-size: 30px;
+    }
+
+    .crearTareas__input {
+        width: 700px;
+    }
+}
+
+/* -- LISTA TAREAS -- */
+
+.listaTareas__contenedor {
+    width: 100%;
+    padding: 10px;
+}
+
+/* -- TARJETA TAREAS -- */
+
+.tarjetaTarea__contenedor {
+    box-shadow: var(--sombra);
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.tarjetaTarea__nombre {
+    font-size: 20px;
+    color: var(--negro);
+    margin-left: 10px;
+}
+
+.tarjetaTarea__eliminar {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    color: var(--rojo);
+}
+
+@media (min-width: 768px) {
+    .tarjetaTarea__contenedor {
+        width: 700px;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    .tarjetaTarea__nombre{
+        font-size: 25px;
+    }
+
+    .tarjetaTarea__opciones {
+        margin-top: 20px;
+    }
+
+    .tarjetaTarea__estado {
+        cursor: pointer;
+        transition: ease 0.2s all;
+    }
+
+    .tarjetaTarea__estado:hover {
+        transform: translateY(-3px);
+        transition: ease 0.2s all;
+    }
+
+    .tarjetaTarea__eliminar {
+        cursor: pointer;
+        transition: ease 0.2s all;
+    }
+
+    .tarjetaTarea__eliminar:hover {
+        transform: translateY(-3px);
+        transition: ease 0.2s all;
+    }
+}

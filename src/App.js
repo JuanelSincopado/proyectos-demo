@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import CrearCuenta from "./components/login/Crear-cuenta";
+import Login from "./components/login/Login";
+import Proyectos from "./components/proyectos/Proyectos";
+import Tareas from "./components/tareas/Tareas";
+import { FirebaseAppProvider } from "reactfire";
+import firebaseConfig from "./firebaseConfig";
+import RutaPrivada from "./components/RutaPrivada";
+import Root from "./components/Root";
+import RutaPublica from "./components/RutaPublica";
+import MensajeState from "./context/mensaje/mensajeState";
+import ProyectosState from "./context/proyectos/ProyectosState";
+import TareasState from "./context/tareas/TareasState";
+import AuthState from "./context/auth/AuthState";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+                <AuthState>
+                    <Root>
+                        <MensajeState>
+                            <ProyectosState>
+                                <TareasState>
+                                    <Switch>
+                                        <RutaPublica
+                                            exact
+                                            path="/"
+                                            component={Login}
+                                        />
+                                        <RutaPublica
+                                            exact
+                                            path="/crear-cuenta"
+                                            component={CrearCuenta}
+                                        />
+                                        <RutaPrivada
+                                            exact
+                                            path="/proyectos"
+                                            component={Proyectos}
+                                        />
+                                        <RutaPrivada
+                                            exact
+                                            path="/tareas"
+                                            component={Tareas}
+                                        />
+                                    </Switch>
+                                </TareasState>
+                            </ProyectosState>
+                        </MensajeState>
+                    </Root>
+                </AuthState>
+            </FirebaseAppProvider>
+        </Router>
+    );
 }
 
 export default App;

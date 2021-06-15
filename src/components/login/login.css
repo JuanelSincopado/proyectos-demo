@@ -1,0 +1,82 @@
+.login__contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25vh;
+}
+
+.login__error{
+    margin: auto;
+    margin-top: 20px;
+    background-color: var(--rojo);
+    color: white;
+    padding: 2px;
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.login__formulario {
+    box-shadow: var(--sombra);
+    border-radius: 10px;
+    width: 90%;
+    padding: 30px;
+    background-color: white;
+}
+
+.login__p {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.login__input {
+    display: block;
+    margin: auto;
+    width: 100%;
+    margin-top: 30px;
+    border: none;
+    border-bottom: solid 1px #e1e1e1;
+    font-size: 18px;
+    outline-width: 0;
+}
+
+.login__contenedorOlvideClave{
+    margin-top: 20px;
+    text-align: right;
+}
+
+.login__ContenedorCrearCuenta{
+    margin-top: 20px;
+}
+
+.login__boton {
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+
+.login__submit {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--azul);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+@media (min-width: 768px) {
+    .login__formulario {
+        width: 660px;
+    }
+}
