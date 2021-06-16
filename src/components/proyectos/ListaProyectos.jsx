@@ -16,11 +16,8 @@ const ListaProyectos = () => {
                 ))}
             </div>
         );
-    } else {
-        return (
-            <Spinner />
-        );
     }
+    return <Spinner />;
 };
 
 export default ListaProyectos;

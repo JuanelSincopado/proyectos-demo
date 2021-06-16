@@ -7,27 +7,17 @@ import TareasContext from "./TareasContext";
 
 const TareasState = ({ children }) => {
     const firestore = useFirestore();
-    const FieldValue = useFirestore.FieldValue;
-
-    const { proyectoAbierto, setProyectoAbierto } =
-        useContext(ProyectosContext);
+    
+    const { proyectoAbierto } = useContext(ProyectosContext);
     const { setMensajeState } = useContext(MensajeContext);
 
     const crearTarea = async (tarea) => {
-        const { tareas } = proyectoAbierto;
-
-        setProyectoAbierto({
-            ...proyectoAbierto,
-            tareas: [...tareas, tarea],
-        });
-
         try {
             await firestore
                 .collection("proyectos")
                 .doc(proyectoAbierto.NO_ID_FIELD)
-                .update({
-                    tareas: FieldValue.arrayUnion(tarea),
-                });
+                .collection("tareas")
+                .add(tarea);
             setMensajeState({
                 mensaje: "Subido con éxito",
                 tipo: "exito",
@@ -51,23 +41,34 @@ const TareasState = ({ children }) => {
         }
     };
 
-    const eliminar = async (tarea) => {
-
-        const resultado = proyectoAbierto.tareas.filter(item => item !== tarea)
-
-        setProyectoAbierto({
-            ...proyectoAbierto,
-            tareas: resultado
-        })
-
+    const cambiarEstado = async (tarea) => {
+        if (tarea.estado) {
+            tarea.estado = false;
+        } else {
+            tarea.estado = true;
+        }
         try {
             await firestore
                 .collection("proyectos")
                 .doc(proyectoAbierto.NO_ID_FIELD)
+                .collection("tareas")
+                .doc(tarea.NO_ID_FIELD)
                 .update({
-                    tareas: FieldValue.arrayRemove(tarea),
+                    estado: tarea.estado,
                 });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
+    const eliminar = async (tarea) => {
+        try {
+            await firestore
+                .collection("proyectos")
+                .doc(proyectoAbierto.NO_ID_FIELD)
+                .collection("tareas")
+                .doc(tarea.NO_ID_FIELD)
+                .delete();
             setMensajeState({
                 mensaje: "Eliminado con éxito",
                 tipo: "exito",
@@ -95,6 +96,7 @@ const TareasState = ({ children }) => {
         <TareasContext.Provider
             value={{
                 crearTarea,
+                cambiarEstado,
                 eliminar,
             }}
         >

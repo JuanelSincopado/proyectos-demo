@@ -16,6 +16,7 @@
     --azul: rgb(61, 152, 226);
     --verde: rgb(69, 163, 69);
     --rojo: rgb(192, 46, 46);
+    --verde-editar: #38dab1;
 }
 
 /* -- PROYECTOS -- */
@@ -25,19 +26,18 @@
     overflow: hidden;
 }
 
-.tareas{
+.tareas {
     position: relative;
     overflow: hidden;
 }
 
 /* -- BOTON CREAR -- */
 
-.botonCrear {
+.boton {
     display: block;
     margin: auto;
     margin-top: 30px;
     border: none;
-    background-color: var(--verde);
     box-shadow: var(--sombra);
     color: white;
     font-weight: 700;
@@ -48,7 +48,20 @@
     font-size: 16px;
 }
 
-.botonCrear:hover {
+.boton-crear {
+    background-color: var(--verde);
+}
+
+.boton-editar {
+    background-color: var(--verde-editar);
+    color: var(--negro);
+}
+
+.boton-eliminar {
+    background-color: var(--rojo);
+}
+
+.boton:hover {
     transform: translateY(-3px);
     transition: all 0.2s ease;
 }
@@ -65,6 +78,7 @@
     border-radius: 10px;
     padding: 20px;
     position: absolute;
+    z-index: 10;
     margin: auto;
     top: 85px;
     left: 0;
@@ -141,5 +155,34 @@
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+/* -- Input -- */
+
+.Input {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    outline-width: 0;
+    border-bottom: solid 1px #e1e1e1;
+}
+
+.Input-editar{
+    color: var(--negro);
+}
+
+.Input::-webkit-input-placeholder {
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .Input {
+        width: 700px;
     }
 }

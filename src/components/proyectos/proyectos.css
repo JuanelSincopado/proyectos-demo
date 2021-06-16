@@ -13,7 +13,7 @@
 .navbar__nombreUsuario {
     color: white;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     margin-left: 20px;
 }
 
@@ -26,7 +26,7 @@
     border-radius: 10px;
     padding: 5px 5px;
     transition: all 0.2s ease;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .navbar__boton > i {
@@ -38,7 +38,7 @@
         font-size: 25px;
     }
 
-    .navbar__boton {
+    .navbar__boton{
         font-size: 20px;
     }
 
@@ -68,7 +68,7 @@
 .crearProyectos__titulo {
     font-weight: 700;
     color: white;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .crearProyectos__formulario-img {
@@ -107,37 +107,11 @@
     font-size: 20px;
 }
 
-.crearProyectos__input {
-    display: block;
-    margin-top: 20px;
-    border: none;
-    border-bottom: solid 1px #e1e1e1;
-    font-size: 16px;
-    outline-width: 0;
-    background-color: transparent;
-    width: 100%;
-    color: white;
-}
-
-.crearProyectos__input::-webkit-input-placeholder {
-    color: white;
-}
-
 .crearProyectos__subiendoImagen{
     margin-top: 20px;
     color: white;
     font-size: 20px;
     
-}
-
-@media (min-width: 768px) {
-    .crearProyectos__input {
-        width: 700px;
-    }
-
-    .crearProyectos__input {
-        font-size: 20px;
-    }
 }
 
 /* -- LISTA PROYECTOS -- */
@@ -182,7 +156,7 @@
 .proyectosItems__titulo {
     font-size: 18px;
     color: var(--negro);
-    text-align: center;
+    text-transform: capitalize;
 }
 
 @media (min-width: 768px) {
@@ -197,6 +171,7 @@
     .proyectosItems__contenedor:hover {
         transition: all 0.2s ease;
         background-color: #f6f5f5;
+        transform: translateY(-3px);
     }
 
     .proyectosItems__contenedorDatos {

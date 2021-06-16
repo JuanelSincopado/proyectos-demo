@@ -1,17 +1,20 @@
-import { useContext } from "react";
-import ProyectosContext from "../../context/proyectos/ProyectosContext";
+import useTraerTareas from "../../hooks/tareas/useTraerTareas";
 import TarjetaTarea from "./TarjetaTarea";
+import Spinner from "../Spinner";
 
 const ListaTareas = () => {
-    const { proyectoAbierto } = useContext(ProyectosContext);
+    const { status, data } = useTraerTareas();
 
-    return (
-        <div className="listaTareas__contenedor">
-            {proyectoAbierto && proyectoAbierto.tareas.map((tarea) => (
-                <TarjetaTarea key={tarea} tarea={tarea} />
-            ))}
-        </div>
-    );
+    if (status === "success") {
+        return (
+            <div className="listaTareas__contenedor">
+                {data.map((tarea) => (
+                    <TarjetaTarea tarea={tarea} key={tarea.NO_ID_FIELD} />
+                ))}
+            </div>
+        );
+    }
+    return <Spinner />;
 };
 
 export default ListaTareas;

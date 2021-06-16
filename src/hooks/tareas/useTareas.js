@@ -6,14 +6,20 @@ const useTareas = () => {
     const { setMensajeState } = useContext(MensajeContext);
     const { crearTarea } = useContext(TareasContext);
 
-    const [tarea, setTarea] = useState("");
+    const [tarea, setTarea] = useState({
+        nombre: "",
+        estado: false,
+    });
 
     const handleOnChange = (e) => {
-        setTarea(e.target.value);
+        setTarea({
+            ...tarea,
+            nombre: e.target.value,
+        });
     };
 
     const crear = () => {
-        if (tarea === "") {
+        if (tarea.nombre === "") {
             setMensajeState({
                 mensaje: "El campo es obligatorio",
                 tipo: "error",
@@ -28,7 +34,9 @@ const useTareas = () => {
 
         crearTarea(tarea);
 
-        setTarea("");
+        setTarea({
+            nombre: "",
+        });
     };
 
     return {

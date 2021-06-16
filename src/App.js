@@ -42,6 +42,7 @@ function App() {
                                             exact
                                             path="/tareas"
                                             component={Tareas}
+                                            tipo='tareas'
                                         />
                                     </Switch>
                                 </TareasState>

@@ -1,5 +1,6 @@
 import useCrearProyectos from "../../hooks/proyectos/useCrearProyectos";
-import BotonCrear from "../BotonCrear";
+import Boton from "../Boton";
+import Input from "../Input";
 
 const CrearProyectos = () => {
     const { proyecto, barProgress, handleOnchange, handleOnChangeImg, crear } =
@@ -22,20 +23,20 @@ const CrearProyectos = () => {
                 <p className="crearProyectos__barProgress">{barProgress}%</p>
             )}
 
-            <input
-                type="text"
-                className="crearProyectos__input"
-                placeholder="Nombre del proyecto"
-                spellCheck="false"
+            <Input
+                className='Input'
+                placeholder="Crear Proyecto"
                 name="nombre"
                 value={proyecto.nombre}
-                onChange={handleOnchange}
+                funcion={handleOnchange}
             />
 
             {barProgress > 0 && barProgress < 100 ? (
-                <p className="crearProyectos__subiendoImagen" >Subiendo Imagen...</p>
+                <p className="crearProyectos__subiendoImagen">
+                    Subiendo Imagen...
+                </p>
             ) : (
-                <BotonCrear titulo="Crear Proyecto" funcion={crear} />
+                <Boton titulo="Crear Proyecto" color='boton-crear' funcion={crear} />
             )}
         </div>
     );

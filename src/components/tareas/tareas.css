@@ -4,9 +4,30 @@
     padding: 20px;
 }
 
+.crearTareas__navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+}
+
 .crearTareas__volver {
     font-size: 20px;
     color: white;
+}
+
+.crearTareas__configuracion {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: white;
+    outline-width: 0;
+}
+
+.crearTareas__proyecto {
+    text-align: center;
+    color: white;
+    font-size: 22px;
 }
 
 .crearTareas__titulo {
@@ -14,6 +35,8 @@
     font-weight: 700;
     color: white;
     font-size: 24px;
+    text-decoration: underline;
+    text-transform: capitalize;
 }
 
 .crearTareas__formulario {
@@ -21,27 +44,22 @@
     text-align: center;
 }
 
-.crearTareas__input {
-    display: block;
-    margin: auto;
-    margin-top: 30px;
-    width: 100%;
-    font-size: 18px;
-    border: none;
-    background-color: transparent;
-    color: white;
-    outline-width: 0;
-    border-bottom: solid 1px #e1e1e1;
-}
-
-.crearTareas__input::-webkit-input-placeholder {
-    color: white;
-}
-
 @media (min-width: 768px) {
     .crearTareas__volver {
         font-size: 25px;
         margin-left: 30px;
+        transition: all 0.2s ease;
+    }
+
+    .crearTareas__configuracion {
+        font-size: 25px;
+        margin-right: 30px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+
+    .crearTareas__configuracion:hover {
+        transform: rotate(-60deg);
         transition: all 0.2s ease;
     }
 
@@ -54,9 +72,6 @@
         font-size: 30px;
     }
 
-    .crearTareas__input {
-        width: 700px;
-    }
 }
 
 /* -- LISTA TAREAS -- */
@@ -70,7 +85,7 @@
 
 .tarjetaTarea__contenedor {
     box-shadow: var(--sombra);
-    padding: 10px;
+    padding: 10px 20px;
     margin-top: 20px;
     border-radius: 10px;
 }
@@ -78,15 +93,37 @@
 .tarjetaTarea__nombre {
     font-size: 20px;
     color: var(--negro);
-    margin-left: 10px;
+    /* margin-left: 10px; */
+}
+
+.tarjetaTarea__botones {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.tarjetaTarea__estado {
+    border: none;
+    font-size: 16px;
+    width: 110px;
+    padding: 5px 0;
+    color: white;
+    border-radius: 10px;
+}
+
+.tarjetaTarea__estado-completo {
+    background-color: var(--verde);
+}
+
+.tarjetaTarea__estado-incompleto {
+    background-color: var(--rojo);
 }
 
 .tarjetaTarea__eliminar {
     border: none;
     background-color: transparent;
     font-size: 20px;
-    margin-top: 10px;
-    margin-left: 10px;
     color: var(--rojo);
 }
 
@@ -97,7 +134,7 @@
         margin-top: 40px;
     }
 
-    .tarjetaTarea__nombre{
+    .tarjetaTarea__nombre {
         font-size: 25px;
     }
 
@@ -123,5 +160,69 @@
     .tarjetaTarea__eliminar:hover {
         transform: translateY(-3px);
         transition: ease 0.2s all;
+    }
+}
+
+/* -- CONFIGURACIÓN PROYECTO -- */
+
+.configuracionProyecto__contenedor-activo {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+}
+
+.configuracionProyecto__contenedor{
+    position: fixed;
+    left: 100%;
+    width: 100%;
+    top: 0;
+}
+
+.configuracionProyecto__volver{
+    font-size: 20px;
+    color: var(--azul);
+    background-color: transparent;
+    border: none;
+    outline-width: 0;
+}
+
+.configuracionProyecto__titulo{
+    text-align: center;
+    text-transform: capitalize;
+    color: var(--negro);
+    margin-top: 50px;
+}
+
+.configuracionProyecto__eliminar{
+    margin-top: 200px;
+}
+
+.configuracionProyecto__eliminar > p{
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--negro);
+    text-align: center;
+}
+
+@media(min-width: 768px){
+
+    .configuracionProyecto__eliminar{
+        margin-top: 150px;
+    }
+
+    .configuracionProyecto__volver{
+        font-size: 25px;
+        margin-left: 30px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+
+    .configuracionProyecto__volver:hover{
+        transition: all 0.2s ease;
+        transform: translateY(-3px);
     }
 }
