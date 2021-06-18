@@ -1,21 +1,44 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "firebase/auth";
 import { useAuth } from "reactfire";
+import { useHistory } from "react-router-dom";
+import MensajeContext from "../../context/mensaje/mensajeContext";
 
-const useLogin = (props) => {
+const useLogin = () => {
+    const history = useHistory();
+
+    const { setMensajeState } = useContext(MensajeContext);
+
     const [user, setUser] = useState({
         correo: "",
         password: "",
     });
+    const [correoRecuperar, setCorreoRecuperar] = useState("");
+    const [abrirVentanaEmergente, setAbrirVentanaEmergente] = useState(false);
     const [error, setError] = useState("");
 
     const firebase = useAuth();
 
-    const handleOnChange = (e) => {
-        setUser({
-            ...user,
-            [e.target.name]: e.target.value,
-        });
+    const handleOnChange = (campo, value) => {
+        switch (campo) {
+            case "correo":
+                setUser({
+                    ...user,
+                    correo: value,
+                });
+                break;
+            case "password":
+                setUser({
+                    ...user,
+                    password: value,
+                });
+                break;
+            case "correoRecuperacion":
+                setCorreoRecuperar(value);
+                break;
+            default:
+                break;
+        }
     };
 
     const submit = () => {
@@ -36,7 +59,7 @@ const useLogin = (props) => {
                 user.correo,
                 user.password
             );
-            props.history.push("/proyectos");
+            history.push("/proyectos");
         } catch (error) {
             console.log(error.message);
             setError(error.message);
@@ -46,10 +69,54 @@ const useLogin = (props) => {
         }
     };
 
+    const recuperarPassword = async () => {
+        if (correoRecuperar === "") {
+            setMensajeState({
+                mensaje: "El nombre es obligatorio",
+                tipo: "error",
+            });
+            setTimeout(() => {
+                setMensajeState({
+                    mensaje: "",
+                });
+            }, 2000);
+            return;
+        }
+
+        try {
+            await firebase.sendPasswordResetEmail(correoRecuperar);
+            setMensajeState({
+                mensaje: "Se envió un mensaje a tu correo",
+                tipo: "exito",
+            });
+            setTimeout(() => {
+                setMensajeState({
+                    mensaje: "",
+                });
+            }, 2000);
+            setCorreoRecuperar("");
+            setAbrirVentanaEmergente(false);
+        } catch (error) {
+            console.log(error.message);
+            setMensajeState({
+                mensaje: "error al enviar correo",
+                tipo: "error",
+            });
+            setTimeout(() => {
+                setMensajeState({
+                    mensaje: "",
+                });
+            }, 2000);
+        }
+    };
+
     return {
+        abrirVentanaEmergente,
         error,
         handleOnChange,
         submit,
+        recuperarPassword,
+        setAbrirVentanaEmergente,
     };
 };
 

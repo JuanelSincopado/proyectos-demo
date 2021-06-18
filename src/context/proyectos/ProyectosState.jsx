@@ -27,7 +27,7 @@ const ProyectosState = ({ children }) => {
                 });
             }, 2000);
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
             setMensajeState({
                 mensaje: "Eror al crear Proyecto",
                 tipo: "error",
@@ -63,7 +63,7 @@ const ProyectosState = ({ children }) => {
                 });
             }, 2000);
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
             setMensajeState({
                 mensaje: "Eror al guardar cambios",
                 tipo: "error",
@@ -95,7 +95,7 @@ const ProyectosState = ({ children }) => {
                 });
             }, 2000);
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
             setMensajeState({
                 mensaje: "Eror al guardar cambios",
                 tipo: "error",

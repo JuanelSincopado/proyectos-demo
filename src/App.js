@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import CrearCuenta from "./components/login/Crear-cuenta";
-import Login from "./components/login/Login";
 import Proyectos from "./components/proyectos/Proyectos";
 import Tareas from "./components/tareas/Tareas";
 import { FirebaseAppProvider } from "reactfire";
@@ -12,6 +11,7 @@ import MensajeState from "./context/mensaje/mensajeState";
 import ProyectosState from "./context/proyectos/ProyectosState";
 import TareasState from "./context/tareas/TareasState";
 import AuthState from "./context/auth/AuthState";
+import LoginBody from "./components/login/LoginBody";
 
 function App() {
     return (
@@ -26,7 +26,7 @@ function App() {
                                         <RutaPublica
                                             exact
                                             path="/"
-                                            component={Login}
+                                            component={LoginBody}
                                         />
                                         <RutaPublica
                                             exact

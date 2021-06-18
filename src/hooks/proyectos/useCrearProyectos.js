@@ -52,7 +52,7 @@ const useCrearProyectos = () => {
                     );
                 },
                 function error(error) {
-                    console.log(error);
+                    console.log(error.message);
                     setMensajeState({
                         mensaje: "Error al subir Imagen",
                         tipo: "error",

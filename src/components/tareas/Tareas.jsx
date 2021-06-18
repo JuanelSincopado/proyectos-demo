@@ -6,7 +6,7 @@ import "./tareas.css";
 
 const Tareas = () => {
     return (
-        <div className="tareas">
+        <div className="relavito">
             <CrearTareas />
 
             <ListaTareas />

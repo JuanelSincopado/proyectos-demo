@@ -1,9 +1,6 @@
-import useLogin from "../../hooks/login/useLogin";
 import "./login.css";
 
-const Login = (props) => {
-    const { error, handleOnChange, submit } = useLogin(props);
-
+const Login = ({ error, handleOnChange, submit, setAbrirVentanaEmergente }) => {
     return (
         <div className="login__contenedor">
             <div className="login__formulario">
@@ -12,18 +9,19 @@ const Login = (props) => {
                     type="email"
                     className="login__input"
                     placeholder="Correo"
-                    name="correo"
-                    onChange={handleOnChange}
+                    onChange={(e) => handleOnChange("correo", e.target.value)}
                 />
                 <input
                     type="password"
                     className="login__input"
                     placeholder="Contraseña"
-                    name="password"
-                    onChange={handleOnChange}
+                    onChange={(e) => handleOnChange("password", e.target.value)}
                 />
                 <div className="login__contenedorOlvideClave">
-                    <button className="login__boton">
+                    <button
+                        className="login__boton"
+                        onClick={() => setAbrirVentanaEmergente(true)}
+                    >
                         olvidé mi contraseña
                     </button>
                 </div>

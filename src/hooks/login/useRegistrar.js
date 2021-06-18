@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useAuth } from "reactfire";
 
 const useRegistrar = (props) => {
+    const firebase = useAuth();
+
     const [error, setError] = useState("");
     const [user, setUser] = useState({
         correo: "",
@@ -36,8 +38,6 @@ const useRegistrar = (props) => {
         registrarUsuario();
     };
 
-    const firebase = useAuth();
-
     const registrarUsuario = async () => {
         try {
             const resultado = await firebase.createUserWithEmailAndPassword(
@@ -49,7 +49,7 @@ const useRegistrar = (props) => {
                 displayName: user.name,
             });
 
-            props.history.push("/proyectos");
+            props.history.push("/");
         } catch (error) {
             console.log(error.message);
             setError(error.message);

@@ -19,14 +19,9 @@
     --verde-editar: #38dab1;
 }
 
-/* -- PROYECTOS -- */
+/* -- RELATIVO -- */
 
-.proyecto {
-    position: relative;
-    overflow: hidden;
-}
-
-.tareas {
+.relavito{
     position: relative;
     overflow: hidden;
 }
